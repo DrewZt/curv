@@ -10,7 +10,7 @@ use crate::{FE, GE};
 
 pub trait Hash {
     fn create_hash(big_ints: &[&BigInt]) -> BigInt;
-    fn create_hash_from_ge(ge_vec: &[&GE]) -> FE;
+    fn create_hash_from_ge(ge_vec: &[&GE]) -> BigInt;
 }
 
 pub trait KeyedHash {

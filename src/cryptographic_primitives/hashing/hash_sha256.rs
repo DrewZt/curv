@@ -36,7 +36,7 @@ impl Hash for HSha256 {
         }
 
         let result_hex = hasher.result();
-        let result = BigInt::from(&result_hex[..]);
+        BigInt::from(&result_hex[..]);
     }
 }
 
