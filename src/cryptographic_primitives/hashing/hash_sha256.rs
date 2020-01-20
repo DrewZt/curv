@@ -29,7 +29,7 @@ impl Hash for HSha256 {
         BigInt::from(&result_hex[..])
     }
 
-    fn create_hash_from_ge(ge_vec: &[&GE]) -> FE {
+    fn create_hash_from_ge(ge_vec: &[&GE]) -> BigInt {
         let mut hasher = Sha256::new();
         for value in ge_vec {
             hasher.input(&value.pk_to_key_slice());
@@ -37,7 +37,6 @@ impl Hash for HSha256 {
 
         let result_hex = hasher.result();
         let result = BigInt::from(&result_hex[..]);
-        ECScalar::from(&result)
     }
 }
 
