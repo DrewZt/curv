@@ -29,14 +29,15 @@ impl Hash for HSha256 {
         BigInt::from(&result_hex[..])
     }
 
-    fn create_hash_from_ge(ge_vec: &[&GE]) -> BigInt {
+    fn create_hash_from_ge(ge_vec: &[&GE]) -> FE {
         let mut hasher = Sha256::new();
         for value in ge_vec {
             hasher.input(&value.pk_to_key_slice());
         }
 
         let result_hex = hasher.result();
-        BigInt::from(&result_hex[..]);
+        let result = BigInt::from(&result_hex[..]);
+        ECScalar::from(&result)
     }
 }
 
