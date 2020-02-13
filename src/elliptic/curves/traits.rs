@@ -37,5 +37,5 @@ where
     fn scalar_mul(&self, fe: &SK) -> Self;
     fn add_point(&self, other: &PK) -> Self;
     fn sub_point(&self, other: &PK) -> Self;
-    fn from_coor(x: &BigInt, y: &BigInt) -> Self;
+    fn from_coor(x: &BigInt, y: &BigInt) -> Option<Self>;
 }

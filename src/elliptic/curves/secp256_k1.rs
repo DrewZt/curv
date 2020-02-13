@@ -452,7 +452,7 @@ impl ECPoint<PK, SK> for Secp256k1Point {
         ECPoint::add_point(self, &minus_point.get_element())
     }
 
-    fn from_coor(x: &BigInt, y: &BigInt) -> Secp256k1Point {
+    fn from_coor(x: &BigInt, y: &BigInt) -> Option<Secp256k1Point> {
         let mut vec_x = BigInt::to_vec(x);
         let mut vec_y = BigInt::to_vec(y);
         let coor_size = (UNCOMPRESSED_PUBLIC_KEY_SIZE - 1) / 2;
@@ -478,10 +478,18 @@ impl ECPoint<PK, SK> for Secp256k1Point {
         v.extend(vec_x);
         v.extend(vec_y);
 
-        Secp256k1Point {
+        let f =PK::from_slice(&v);
+
+        let mut f = match f {
+            Ok(pk) => pk,
+            Err(e) => return None,
+        };
+
+
+        Some(Secp256k1Point {
             purpose: "base_fe",
-            ge: PK::from_slice(&v).unwrap(),
-        }
+            ge: f,
+        })
     }
 }
 
