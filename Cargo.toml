@@ -1,6 +1,6 @@
 [package]
 name = "curv"
-version = "2.0"
+version = "0.3.0"
 edition = "2018"
 
 [lib]
